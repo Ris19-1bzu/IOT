@@ -59,3 +59,5 @@ async def videoProcessing(identifier, imshow=False):
 			except Exception as e:
 				# если не распознается - просто продолжаем цикл
 				continue
+                
+            ret, v = cv2.imencode('.jpg', scaled)

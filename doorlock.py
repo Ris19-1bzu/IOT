@@ -1,11 +1,11 @@
 from sanic import Sanic
-from sanic.response import text
+import sanic.response as sanic_response
 
 app = Sanic("CvLock")
 
 @app.get("/")
-async def hello_world(request):
-    return text("Hello, world.")
+async def index(request):
+    return await sanic_response.file('index/index.html')
 
 
 
