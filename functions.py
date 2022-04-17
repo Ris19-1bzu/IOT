@@ -60,4 +60,20 @@ async def videoProcessing(identifier, imshow=False):
 				# если не распознается - просто продолжаем цикл
 				continue
                 
+                
+            person = identifier.getIDFromEncoding(face_encoding)
+
+			if person is None:
+				# Новое лицо,
+				# генерируем новый id, и сохраняем
+				print('Добавляется новое лицо')
+				identifier.addNew(face_img, face_encoding)
+				continue
+
+			if identifier.hasAccess(person):
+				accessGranted()
+			else:
+				accessDenied()  
+
             ret, v = cv2.imencode('.jpg', scaled)
+            identifier.setView(v)            
